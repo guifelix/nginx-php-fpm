@@ -1,4 +1,4 @@
-FROM php:8.2.7-fpm-alpine3.18
+FROM php:8.3.4-fpm-alpine3.18
 
 LABEL maintainer="Ric Harvey <ric@squarecows.com>"
 
@@ -70,7 +70,7 @@ RUN apk add --no-cache --virtual .sys-deps \
       --with-jpeg && \
     docker-php-ext-install gd && \
      pip install --upgrade pip && \
-    docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip && \
+    docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip opcache bcmath xml && \
     pecl install -o -f xdebug && \
     pecl install -o -f redis && \ 
     pecl install -o -f mongodb && \
