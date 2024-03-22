@@ -55,7 +55,7 @@ RUN apk add --no-cache --virtual .sys-deps \
     libffi-dev \
     sqlite-dev \
     imap-dev \
-    postgresql-dev \
+    # postgresql-dev \
     lua-resty-core \
     libjpeg-turbo-dev \
     libwebp-dev \
@@ -70,10 +70,11 @@ RUN apk add --no-cache --virtual .sys-deps \
       --with-jpeg && \
     docker-php-ext-install gd && \
      pip install --upgrade pip && \
-    docker-php-ext-install pdo_mysql mysqli pdo_sqlite pgsql pdo_pgsql exif intl xsl soap zip opcache bcmath xml && \
+    docker-php-ext-install pdo_mysql mysqli pdo_sqlite exif intl xsl soap zip opcache bcmath xml && \
+    # docker-php-ext-install pgsql pdo_pgsql && \
     pecl install -o -f xdebug && \
     pecl install -o -f redis && \ 
-    pecl install -o -f mongodb && \
+    # pecl install -o -f mongodb && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini && \
     echo "zend_extension=xdebug" > /usr/local/etc/php/conf.d/xdebug.ini && \
@@ -108,8 +109,8 @@ RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/defau
 
 # tweak php-fpm config
 RUN echo "cgi.fix_pathinfo=0" > ${php_vars} &&\
-    echo "upload_max_filesize = 100M"  >> ${php_vars} &&\
-    echo "post_max_size = 100M"  >> ${php_vars} &&\
+    echo "upload_max_filesize = 10M"  >> ${php_vars} &&\
+    echo "post_max_size = 50M"  >> ${php_vars} &&\
     echo "variables_order = \"EGPCS\""  >> ${php_vars} && \
     echo "memory_limit = 128M"  >> ${php_vars} && \
     sed -i \
