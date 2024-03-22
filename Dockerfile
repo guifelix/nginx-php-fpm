@@ -72,12 +72,12 @@ RUN apk add --no-cache --virtual .sys-deps \
      pip install --upgrade pip && \
     docker-php-ext-install pdo_mysql mysqli pdo_sqlite exif intl xsl soap zip opcache bcmath xml && \
     # docker-php-ext-install pgsql pdo_pgsql && \
-    pecl install -o -f xdebug && \
+    # pecl install -o -f xdebug && \
     pecl install -o -f redis && \ 
     # pecl install -o -f mongodb && \
     echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini && \
     echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini && \
-    echo "zend_extension=xdebug" > /usr/local/etc/php/conf.d/xdebug.ini && \
+    # echo "zend_extension=xdebug" > /usr/local/etc/php/conf.d/xdebug.ini && \
     docker-php-source delete && \
     mkdir -p /var/www/app && \
   # Install composer and certbot
